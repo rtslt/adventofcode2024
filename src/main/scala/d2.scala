@@ -2,36 +2,38 @@ package day2
 
 
 class Day2 {
-    def isAllIncrease(arr: Array[Int]): Boolean =
-        return arr.sliding(2).forall {
-            case Array(x, y) => x < y
-        }
+    def isIncrease(x: Int, y: Int): Boolean = return x < y
 
-    def isAllDecrease(arr: Array[Int]): Boolean =
-        return arr.sliding(2).forall {
-            case Array(x, y) => x > y
-        }
+    def isDecrease(x: Int, y: Int): Boolean = return x > y
 
-    def isDiffInCondition(arr: Array[Int]): Boolean =
-        return arr.sliding(2).forall {
-            case Array(x, y) => {
-                math.abs(x - y) match
-                case 1 => true
-                case 2 => true
-                case 3 => true
-                case _ => false
-            }
-            
-        }
+    def isDiffInCondition(x: Int, y: Int): Boolean =
+        return math.abs(x - y) match
+            case 1 => true
+            case 2 => true
+            case 3 => true
+            case _ => false
 
     def isSafe(report: Array[Int]): Boolean =
-        val isDiff: Boolean = isDiffInCondition(report)
-        val isIncrease: Boolean = isAllIncrease(report)
-        val isDecrease: Boolean = isAllDecrease(report)
+        val a = report
+        .sliding(2)
+        .map {
+            case Array(x, y) => Array(
+                isIncrease(x, y), 
+                isDecrease(x, y), 
+                isDiffInCondition(x, y)
+            )
+        }
+        .reduce((x, y) => Array(x(0) & y(0), x(1) & y(1), x(2) & y(2)))
+        .toList
 
-        if isDiff && isIncrease then return true 
-        else if isDiff && isDecrease then return true
+        val _isIncrease: Boolean = a(0)
+        val _isDecrease: Boolean = a(1)
+        val _isDiff: Boolean = a(2)
+
+        if _isDiff && _isIncrease then return true 
+        else if _isDiff && _isDecrease then return true
         else return false
+
 
     def getDataFromFile(): Seq[String] = 
         val file_path: os.Path = os.pwd / "inputs"/ "d2" / "input.txt"
@@ -44,7 +46,7 @@ class Day2 {
 
         val countSafe: Int = reports.map(x => isSafe(x)).count(_ == true)
 
-        reports.foreach(x => println(x.mkString(" ")))
+        // reports.foreach(x => println(x.mkString(" ")))
 
         return countSafe
 

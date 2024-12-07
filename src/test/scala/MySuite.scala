@@ -11,74 +11,74 @@ class MySuite extends munit.FunSuite {
 class TestDay2 extends munit.FunSuite {
   import day2.Day2
   
-  test("all increase") {
+  test("is increase") {
     var obtained = true
     var expected = true
-    obtained = Day2().isAllIncrease(Array(7,6,4,2,1))
+    obtained = Day2().isIncrease(7, 6)
     expected = false
     assertEquals(obtained, expected, "Should be false")
 
-    obtained = Day2().isAllIncrease(Array(1,2,7,8,9))
+    obtained = Day2().isIncrease(1, 2)
     expected = true
     assertEquals(obtained, expected, "Should be true")
 
-    obtained = Day2().isAllIncrease(Array(1,2,7,5,9))
-    expected = false
-    assertEquals(obtained, expected, "Should be false")
-
-    obtained = Day2().isAllIncrease(Array(1,2,2,5,9))
+    obtained = Day2().isIncrease(2, 2)
     expected = false
     assertEquals(obtained, expected, "Should be false")
   }
 
-  test("all decrease") {
+  test("is decrease") {
     var obtained = true
     var expected = true
-    obtained = Day2().isAllDecrease(Array(7,6,4,2,1))
+    obtained = Day2().isDecrease(4, 1)
     expected = true
     assertEquals(obtained, expected, "Should be true")
 
-    obtained = Day2().isAllDecrease(Array(7,6,2,2,1))
+    obtained = Day2().isDecrease(1, 5)
     expected = false
     assertEquals(obtained, expected, "Should be false")
 
-    obtained = Day2().isAllDecrease(Array(1,2,7,8,9))
-    expected = false
-    assertEquals(obtained, expected, "Should be false")
-
-    obtained = Day2().isAllDecrease(Array(1,2,7,5,9))
+    obtained = Day2().isDecrease(3, 3)
     expected = false
     assertEquals(obtained, expected, "Should be false")
   }
 
-  test("all diff in conditions") {
+  test("is diff in conditions") {
     var obtained = true
     var expected = true
-    obtained = Day2().isDiffInCondition(Array(7,6,4,2,1))
+    obtained = Day2().isDiffInCondition(1, 2)
     expected = true
     assertEquals(obtained, expected, "Should be true")
 
-    obtained = Day2().isDiffInCondition(Array(1,2,7,8,9))
-    expected = false
-    assertEquals(obtained, expected, "Should be false")
-
-    obtained = Day2().isDiffInCondition(Array(9,7,6,2,1))
-    expected = false
-    assertEquals(obtained, expected, "Should be false")
-
-    obtained = Day2().isDiffInCondition(Array(1,3,2,4,5))
+    obtained = Day2().isDiffInCondition(2, 1)
     expected = true
     assertEquals(obtained, expected, "Should be true")
 
-    obtained = Day2().isDiffInCondition(Array(8,6,4,4,1))
-    expected = false
-    assertEquals(obtained, expected, "Should be false")
-
-    obtained = Day2().isDiffInCondition(Array(1,3,6,7,9))
+    obtained = Day2().isDiffInCondition(1, 3)
     expected = true
     assertEquals(obtained, expected, "Should be true")
 
-    obtained = Day2().isDiffInCondition(Array(7,6,4,2,2))
+    obtained = Day2().isDiffInCondition(3, 1)
+    expected = true
+    assertEquals(obtained, expected, "Should be true")
+
+    obtained = Day2().isDiffInCondition(1, 4)
+    expected = true
+    assertEquals(obtained, expected, "Should be true")
+
+    obtained = Day2().isDiffInCondition(4, 1)
+    expected = true
+    assertEquals(obtained, expected, "Should be true")
+
+    obtained = Day2().isDiffInCondition(1, 1)
+    expected = false
+    assertEquals(obtained, expected, "Should be false")
+
+    obtained = Day2().isDiffInCondition(1, 5)
+    expected = false
+    assertEquals(obtained, expected, "Should be false")
+
+    obtained = Day2().isDiffInCondition(5, 1)
     expected = false
     assertEquals(obtained, expected, "Should be false")
   }
